@@ -51,6 +51,7 @@ const Login = () => {
             <InputLabel>Role</InputLabel>
                 <Select 
                     label='role'
+                    {...register('role')}
                 >
                     <MenuItem value="Admin">Admin</MenuItem>
                     <MenuItem value="User">User</MenuItem>
