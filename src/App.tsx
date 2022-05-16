@@ -9,11 +9,14 @@ function App() {
   return (
     <>
       <Header />
-      {/* <SideBar /> */}
-
-      <SideBar />
-
-      <Main />
+      <Grid container>
+        <Grid item xs={2}>
+          <SideBar />
+        </Grid>
+        <Grid item xs={10} sx={{mt:"80px", height: "85vh"}} >
+          <Main />
+        </Grid>
+      </Grid>
 
       {/* <LoginModal /> */}
     </>

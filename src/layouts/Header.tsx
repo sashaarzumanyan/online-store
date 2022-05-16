@@ -1,22 +1,28 @@
 import { AppBar, Box, Toolbar, Button, Typography } from '@mui/material'
-import React from 'react'
+import React, { useEffect } from 'react'
+import {  useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
-import { setOpen } from '../store/slice/configsSlice'
+import { checkLogin, setOpen } from '../store/slice/configsSlice'
 
 const Header = (): JSX.Element => {
-  const open = useAppSelector(state => state.configs.open)
+  const { open, isLogin } = useAppSelector(state => state.configs)
+  let navigate = useNavigate()
   const dispatch = useAppDispatch()
 
-  const handleOpen = (): void =>{
-    dispatch(setOpen(!open))
+  useEffect(()=>{
+    dispatch(checkLogin())
+  },[isLogin])
+
+  const handleOpen = (): void => {
+    navigate(`/login`)
   }
   return (
     <AppBar >
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          MUI 
+          MUI
         </Typography>
-        <Button color="inherit" onClick={handleOpen}>Login</Button>
+        { !isLogin && <Button color="inherit" onClick={handleOpen}>Login</Button>}
       </Toolbar>
     </AppBar>
   )
